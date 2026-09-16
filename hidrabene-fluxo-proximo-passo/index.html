@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fluxo Próximo Passo · Hidrabene</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --ground:#F9F6F5; --surface:#FFFFFF; --ink:#1D1D1B; --muted:#6B6563;
+    --line:#EFE4E4; --accent:#E56C91; --fluor:#F50A78; --soft:#FDEDF1;
+    --title:'Poppins',Arial,sans-serif; --body:'Barlow',Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --ground:#171516; --surface:#201D1E; --ink:#F4EFEF; --muted:#A79FA0;
+      --line:#332D2F; --accent:#E9899F; --fluor:#FF4C95; --soft:#2B2224;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#171516; --surface:#201D1E; --ink:#F4EFEF; --muted:#A79FA0;
+    --line:#332D2F; --accent:#E9899F; --fluor:#FF4C95; --soft:#2B2224;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;}
+  .wrap{max-width:860px;margin:0 auto;padding-block:56px 72px;padding-left:20px;padding-right:20px;}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:34px;}
+  header img{width:118px;height:auto;}
+  h1{font-family:var(--title);font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-0.02em;margin:0 0 10px;text-wrap:balance;}
+  .lead{color:var(--muted);max-width:62ch;margin:0 0 6px;}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 40px;}
+  .flow span{font-family:var(--title);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+    background:var(--soft);color:var(--accent);border-radius:999px;padding:6px 14px;}
+  section{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px 24px;margin-bottom:20px;}
+  .head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:6px;}
+  h2{font-family:var(--title);font-size:22px;font-weight:700;margin:0;}
+  .when{font-family:var(--title);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--fluor);}
+  .sub{color:var(--muted);font-size:15px;margin:0 0 18px;}
+  .group{margin-top:16px;}
+  .group p{font-family:var(--title);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;}
+  ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;}
+  li a{display:inline-block;font-size:14px;text-decoration:none;color:var(--ink);border:1px solid var(--line);
+    border-radius:10px;padding:8px 13px;background:var(--ground);}
+  li a:hover,li a:focus-visible{border-color:var(--accent);color:var(--accent);}
+  .files{display:grid;gap:10px;}
+  .files a{color:var(--ink);font-size:15px;}
+  footer{color:var(--muted);font-size:14px;margin-top:34px;}
+  code{font-size:13px;background:var(--soft);color:var(--accent);padding:2px 6px;border-radius:6px;}
+  a{color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="assets/brand/logo-hidrabene-nav.webp" alt="Hidrabene">
+  </header>
+
+  <h1>Fluxo Próximo Passo</h1>
+  <p class="lead">Os três e-mails de cross-sell que rodam depois da primeira compra, com uma prévia para cada caminho dinâmico. Estas páginas são só para revisão do time: o que vai para o Klaviyo são os templates em <code>templates/</code>.</p>
+
+  <div class="flow">
+    <span>D+1 e-mail 1</span><span>D+2 e-mail 2 e WhatsApp</span><span>D+3 e-mail 3</span><span>D+4 sem envio</span><span>D+5 nutrição</span>
+  </div>
+
+  <section>
+    <div class="head"><h2>Mapa do fluxo</h2></div>
+    <p class="sub">A lógica em volta dos e-mails: gatilho, exclusões, variáveis do evento, mapas de produto e de kit, regras do Cashback Antecipado e pendências por responsável. É o documento que o time usa pra montar o fluxo no Klaviyo.</p>
+    <div class="files">
+      <a href="https://claude.ai/artifact/WdGksgq8zJUdS3fwFpytmT">Abrir o mapa de implementação</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>E-mail 1 · Atualização do pedido</h2><span class="when">D+1</span></div>
+    <p class="sub">Timeline do pedido, galeria de resultados e a rotina completa por dor de pele, com o Cashback Antecipado em ticket.</p>
+    <div class="group">
+      <p>Por dor de pele</p>
+      <ul>
+        <li><a href="previews/email-1.preview-dor-manchas.html">Manchas</a></li>
+        <li><a href="previews/email-1.preview-dor-acne.html">Acne e oleosidade</a></li>
+        <li><a href="previews/email-1.preview-dor-anti_idade.html">Anti-idade</a></li>
+        <li><a href="previews/email-1.preview-dor-hidratacao.html">Hidratação e viço</a></li>
+        <li><a href="previews/email-1.preview-dor-fallback.html">Padrão</a></li>
+      </ul>
+    </div>
+    <div class="group">
+      <p>Por etapa do pedido</p>
+      <ul>
+        <li><a href="previews/email-1.preview-etapa-separacao.html">Em separação</a></li>
+        <li><a href="previews/email-1.preview-etapa-entregue.html">Entregue</a></li>
+        <li><a href="previews/email-1.preview-etapa-sem-status.html">Sem status</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>E-mail 2 · Cashback Antecipado vencendo</h2><span class="when">D+2</span></div>
+    <p class="sub">Curto e direto: Cashback Antecipado, aviso de que vence amanhã e a mesma rotina recomendada.</p>
+    <div class="group">
+      <p>Por dor de pele</p>
+      <ul>
+        <li><a href="previews/email-2.preview-manchas.html">Manchas</a></li>
+        <li><a href="previews/email-2.preview-acne.html">Acne e oleosidade</a></li>
+        <li><a href="previews/email-2.preview-anti_idade.html">Anti-idade</a></li>
+        <li><a href="previews/email-2.preview-hidratacao.html">Hidratação e viço</a></li>
+        <li><a href="previews/email-2.preview-fallback.html">Padrão</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>E-mail 3 · Último dia do Cashback Antecipado</h2><span class="when">D+3</span></div>
+    <p class="sub">Uma decisão só: um kit escolhido pelo produto que ela comprou, seguindo a lógica de match do quiz.</p>
+    <div class="group">
+      <p>Por produto comprado</p>
+      <ul>
+        <li><a href="previews/email-3.preview-protetor.html">Protetor 1 ou 2 un</a></li>
+        <li><a href="previews/email-3.preview-protetor_kit3.html">Protetor 3+ un</a></li>
+        <li><a href="previews/email-3.preview-kit_clareador.html">Kit Clareador</a></li>
+        <li><a href="previews/email-3.preview-antiacne.html">Antiacne</a></li>
+        <li><a href="previews/email-3.preview-antiacne_sensivel.html">Antiacne, pele sensível</a></li>
+        <li><a href="previews/email-3.preview-coreana.html">Coreana, 1 sérum</a></li>
+        <li><a href="previews/email-3.preview-coreana_duo.html">Coreana, Duo</a></li>
+        <li><a href="previews/email-3.preview-base_stick.html">Base Stick</a></li>
+        <li><a href="previews/email-3.preview-anti_idade.html">Retinol, olhos ou pele madura</a></li>
+        <li><a href="previews/email-3.preview-hidratacao.html">Pele seca ou sem viço</a></li>
+        <li><a href="previews/email-3.preview-fallback.html">Padrão</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>Para produção</h2></div>
+    <p class="sub">Os templates têm as condicionais do Klaviyo e as variáveis do evento. Os geradores são a fonte: qualquer ajuste de texto, produto ou preço se faz neles e reconstrói os três e-mails.</p>
+    <div class="files">
+      <a href="templates/email-1.html">templates/email-1.html</a>
+      <a href="templates/email-2.html">templates/email-2.html</a>
+      <a href="templates/email-3.html">templates/email-3.html</a>
+    </div>
+  </section>
+
+  <footer>Nas prévias, os blocos rosa são espaços reservados de imagem e os valores do pedido são exemplos. Cashback Antecipado de R$ 15 em compras acima de R$ 150 (na Yampi, cupom ROTINA15).</footer>
+</div>
+</body>
+</html>

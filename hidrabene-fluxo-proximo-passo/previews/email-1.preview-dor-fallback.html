@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>Próximo Passo · E-mail 1 · Atualização do pedido</title>
+<!--
+  FLUXO: Próximo Passo (cross-sell) · E-mail 1 · D+1 depois do WeUP - Pedido Pago
+  ASSUNTO:  Mariana, atualização do seu pedido...
+  ALTERNATIVO: Mariana, seu pedido e o que esperar quando ele chegar
+  PREVIEW: Previsão de entrega e um jeito de ver resultado mais rápido.
+  GERADO POR build_email1.py (editar os dados lá, não aqui).
+
+  VARIÁVEIS A CONFIRMAR (nomes provisórios):
+    event.numero_pedido · event.link_rastreio
+    event.etapa → "separacao" | "a_caminho" | "entregue" | (vazio = fallback em separação, sem contagem)
+    event.dias_restantes → dias até a previsão de entrega (calcular a partir da previsão da WeUP)
+    event.dor → "manchas" | "acne" | "anti_idade" | "hidratacao" | (outro = fallback)
+      regra: quiz_preocupacao_1 do perfil (manchas; acne/cravos/oleo; rugas/firmeza/olheiras; vico/seca);
+      sem quiz, inferir pelo item facial mais caro do pedido. No Klaviyo, trocar por
+      person|lookup:'dor_categoria' (propriedade calculada) ou pelas condições reais do payload.
+    data_limite → envio + 2 dias, ou seja, o D+3, dia do E3 (definir como calcular)
+  BUILD: esconder o card do produto que ela já comprou e puxar a reserva da categoria.
+  IMAGENS: blocos rosa = espaço reservado. Logo/selos .webp locais só pra prévia; no Klaviyo, PNG hospedado.
+  LINKS: TOKEN-... = token Yampi de cada produto. Botão "rotina completa" = os 3 tokens + ?promocode=ROTINA15.
+  CASHBACK ANTECIPADO: é como a copy chama o benefício (R$ 15 que voltam da compra que ela acabou de fazer).
+    Sempre o nome inteiro, nunca só "cashback", e sempre com o mínimo de R$ 150 por perto.
+    Na mecânica é o cupom ROTINA15 · R$ 15 off acima de R$ 150 · criar na Yampi com validade real.
+  BUILD: se esconder card de produto já comprado, a reserva precisa manter a rotina acima de R$ 150.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Noto+Serif+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;padding:0;background:#F9F6F5;-webkit-text-size-adjust:100%;}
+  table{border-collapse:collapse;}
+  img{border:0;display:block;max-width:100%;height:auto;}
+  em.serif{font-family:'Noto Serif Display',Georgia,serif;font-style:italic;font-weight:500;}
+  @media (max-width:600px){
+    .wrap{width:100%!important;}
+    .px{padding-left:20px!important;padding-right:20px!important;}
+    .h2{font-size:24px!important;line-height:30px!important;}
+    .selo{width:50%!important;display:inline-block!important;padding-bottom:16px!important;}
+    .ticket{width:100%!important;}
+  }
+  @media (max-width:480px){
+    .card-img,.card-txt{display:block!important;width:100%!important;padding:0!important;}
+    .card-img .ph{width:100%!important;}
+    .card-txt{padding-top:14px!important;}
+    .cta-card{width:100%!important;}
+    .cta-card a{display:block!important;text-align:center!important;}
+  }
+</style>
+</head>
+<body style="margin:0;padding:0;background:#F9F6F5;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F9F6F5;">Previsão de entrega e um jeito de ver resultado mais rápido.&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9F6F5;">
+<tr><td align="center" style="padding:0;">
+<table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" style="width:600px;background:#FFFFFF;">
+
+  <!-- S1 · HEADER -->
+  <tr><td align="center" style="padding:28px 32px 20px;background:#FFFFFF;">
+    <img src="../assets/brand/logo-hidrabene-nav.webp" width="150" alt="Hidrabene" style="width:150px;">
+  </td></tr>
+
+  <!-- S2 · TIMELINE DO PEDIDO (dinâmica por event.etapa) -->
+  <tr><td class="px" style="padding:36px 32px 40px;background:#F9F6F5;">
+    <h1 style="margin:0 0 8px;font-family:'Poppins',Arial,sans-serif;font-size:26px;line-height:32px;font-weight:700;color:#1D1D1B;text-align:center;">Seu pedido já está andando</h1>
+    <p style="margin:0 0 24px;font-family:'Barlow',Arial,sans-serif;font-size:16px;line-height:24px;color:#1D1D1B;text-align:center;">Oi, Mariana. Aqui embaixo você vê em que etapa ele está e quando chega.</p>
+    
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 18px;"><tr><td width="25%" valign="top" align="center" style="width:25%;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:0;"><div style="height:3px;background:transparent;font-size:0;line-height:0;">&nbsp;</div></td><td width="26" style="width:26px;"><div style="width:26px;height:26px;border-radius:50%;box-sizing:border-box;margin:0 auto;background:#E56C91;text-align:center;font-family:Arial,sans-serif;font-size:13px;line-height:26px;color:#FFFFFF;">&#10003;</div></td><td style="padding:0;"><div style="height:3px;background:#E56C91;font-size:0;line-height:0;">&nbsp;</div></td></tr></table><p style="margin:8px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:11px;line-height:14px;font-weight:600;color:#1D1D1B;text-align:center;">Confirmado</p></td><td width="25%" valign="top" align="center" style="width:25%;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:0;"><div style="height:3px;background:#E56C91;font-size:0;line-height:0;">&nbsp;</div></td><td width="26" style="width:26px;"><div style="width:26px;height:26px;border-radius:50%;box-sizing:border-box;margin:0 auto;background:#E56C91;text-align:center;font-family:Arial,sans-serif;font-size:13px;line-height:26px;color:#FFFFFF;">&#10003;</div></td><td style="padding:0;"><div style="height:3px;background:#E56C91;font-size:0;line-height:0;">&nbsp;</div></td></tr></table><p style="margin:8px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:11px;line-height:14px;font-weight:600;color:#1D1D1B;text-align:center;">Em separação</p></td><td width="25%" valign="top" align="center" style="width:25%;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:0;"><div style="height:3px;background:#E56C91;font-size:0;line-height:0;">&nbsp;</div></td><td width="26" style="width:26px;"><div style="width:26px;height:26px;border-radius:50%;box-sizing:border-box;margin:0 auto;background:#FFFFFF;border:3px solid #E56C91;"><div style="width:8px;height:8px;border-radius:50%;background:#E56C91;margin:6px auto 0;"></div></div></td><td style="padding:0;"><div style="height:3px;background:#EDE6E5;font-size:0;line-height:0;">&nbsp;</div></td></tr></table><p style="margin:8px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:11px;line-height:14px;font-weight:700;color:#1D1D1B;text-align:center;">A caminho</p></td><td width="25%" valign="top" align="center" style="width:25%;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:0;"><div style="height:3px;background:#EDE6E5;font-size:0;line-height:0;">&nbsp;</div></td><td width="26" style="width:26px;"><div style="width:26px;height:26px;border-radius:50%;box-sizing:border-box;margin:0 auto;background:#FFFFFF;border:2px solid #E3DCDB;"></div></td><td style="padding:0;"><div style="height:3px;background:transparent;font-size:0;line-height:0;">&nbsp;</div></td></tr></table><p style="margin:8px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:11px;line-height:14px;font-weight:500;color:#6B6563;text-align:center;">Na sua casa</p></td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border:1px solid #F8D7DE;border-radius:20px;">
+      <tr><td style="padding:18px 20px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+          <td style="font-family:'Poppins',Arial,sans-serif;font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.06em;color:#E56C91;">A CAMINHO</td>
+          <td align="right" style="font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:16px;color:#6B6563;">Pedido nº 1648723</td>
+        </tr></table>
+        <p style="margin:10px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:23px;font-weight:700;color:#1D1D1B;">A caixa já saiu e está com a transportadora.</p><div style="height:1px;line-height:1px;background:#F8D7DE;margin-top:12px;">&nbsp;</div><p style="margin:12px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;"><strong>Chega em até 6 dias.</strong> Separa um espaço na sua necessaire.</p>
+        <p style="margin:12px 0 0;"><a href="#" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:600;color:#E56C91;text-decoration:underline;">Acompanhar meu pedido</a></p>
+      </td></tr>
+    </table>
+    <p style="margin:20px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">Enquanto a caixa não chega, dá uma olhada no que muda na pele com algumas semanas de uso.</p>
+    
+  </td></tr>
+
+  <!-- S3a · GALERIA DE RESULTADOS (geral, igual pra todas) -->
+  <tr><td class="px" style="padding:40px 32px 12px;background:#FFFFFF;">
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:30px;line-height:36px;font-weight:800;letter-spacing:-0.01em;color:#1D1D1B;text-align:center;">Melhora <em class="serif">visivelmente</em> a sua pele</h2>
+    <p style="margin:0 0 14px;font-family:'Barlow',Arial,sans-serif;font-size:16px;line-height:24px;color:#1D1D1B;text-align:center;">Fórmula de dermocosmético profissional, com preço que cabe na sua rotina.</p>
+    <table role="presentation" align="center" cellpadding="0" cellspacing="0" style="margin:0 auto 22px;"><tr>
+      <td style="padding:0 8px;"><img src="../assets/brand/selo-derm-testado.webp" width="48" alt="Dermatologicamente testado" style="width:48px;"></td>
+      <td style="padding:0 8px;"><img src="../assets/brand/selo-cruelty-free-vegan.webp" width="48" alt="Cruelty free e vegano" style="width:48px;"></td>
+      <td style="padding:0 8px;"><img src="../assets/brand/selo-industria-brasileira.webp" width="48" alt="Indústria brasileira" style="width:48px;"></td>
+    </tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td width="50%" valign="top" style="padding-right:8px;"><div class="ph" style="width:100%;height:260px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:260px;color:#1D1D1B;">IMG 1:1 · antes e depois real</div><p style="margin:10px 0 0;"><span style="display:inline-block;padding:5px 14px;background:#1D1D1B;border-radius:999px;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#FFFFFF;">8 SEMANAS</span></p><p style="margin:6px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:19px;color:#6B6563;">Manchas de sol</p></td><td width="50%" valign="top" style="padding-left:8px;"><div class="ph" style="width:100%;height:260px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:260px;color:#1D1D1B;">IMG 1:1 · antes e depois real</div><p style="margin:10px 0 0;"><span style="display:inline-block;padding:5px 14px;background:#1D1D1B;border-radius:999px;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#FFFFFF;">6 SEMANAS</span></p><p style="margin:6px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:19px;color:#6B6563;">Marcas de espinha</p></td></tr><tr><td colspan="2" style="height:20px;line-height:20px;">&nbsp;</td></tr><tr><td width="50%" valign="top" style="padding-right:8px;"><div class="ph" style="width:100%;height:260px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:260px;color:#1D1D1B;">IMG 1:1 · antes e depois real</div><p style="margin:10px 0 0;"><span style="display:inline-block;padding:5px 14px;background:#1D1D1B;border-radius:999px;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#FFFFFF;">4 SEMANAS</span></p><p style="margin:6px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:19px;color:#6B6563;">Espinhas ativas</p></td><td width="50%" valign="top" style="padding-left:8px;"><div class="ph" style="width:100%;height:260px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:260px;color:#1D1D1B;">IMG 1:1 · antes e depois real</div><p style="margin:10px 0 0;"><span style="display:inline-block;padding:5px 14px;background:#1D1D1B;border-radius:999px;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#FFFFFF;">2 SEMANAS</span></p><p style="margin:6px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:19px;color:#6B6563;">Oleosidade e brilho</p></td></tr><tr><td colspan="2" style="height:20px;line-height:20px;">&nbsp;</td></tr><tr><td width="50%" valign="top" style="padding-right:8px;"><div class="ph" style="width:100%;height:260px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:260px;color:#1D1D1B;">IMG 1:1 · antes e depois real</div><p style="margin:10px 0 0;"><span style="display:inline-block;padding:5px 14px;background:#1D1D1B;border-radius:999px;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#FFFFFF;">3 SEMANAS</span></p><p style="margin:6px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:19px;color:#6B6563;">Pele opaca, sem viço</p></td><td width="50%" valign="top" style="padding-left:8px;"><div class="ph" style="width:100%;height:260px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:260px;color:#1D1D1B;">IMG 1:1 · antes e depois real</div><p style="margin:10px 0 0;"><span style="display:inline-block;padding:5px 14px;background:#1D1D1B;border-radius:999px;font-family:'Poppins',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.04em;color:#FFFFFF;">8 SEMANAS</span></p><p style="margin:6px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:19px;color:#6B6563;">Linhas finas</p></td></tr></table>
+    <p style="margin:24px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">Com a rotina completa, a diferença aparece antes.</p>
+  </td></tr>
+
+  <!-- S3b · DEPOIMENTO (avaliação REAL de compradora) -->
+  <tr><td class="px" style="padding:20px 24px 32px;background:#FFFFFF;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9F6F5;border-radius:16px;">
+      <tr><td style="padding:24px 20px;text-align:center;">
+        <p style="margin:0 0 12px;font-family:Arial,sans-serif;font-size:18px;letter-spacing:0.12em;color:#E56C91;">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p style="margin:0 0 12px;font-family:'Barlow',Arial,sans-serif;font-size:16px;line-height:24px;color:#1D1D1B;">[DEPOIMENTO REAL de compradora, com prazo de uso. Não usar texto inventado.]</p>
+        <p style="margin:0 0 4px;font-family:'Poppins',Arial,sans-serif;font-size:16px;font-weight:700;color:#1D1D1B;">[Nome, cidade]</p>
+        <p style="margin:0;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:16px;color:#6B6563;"><span style="color:#E56C91;">&#9679;</span>&nbsp; Compradora verificada</p>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- S4 · COMO ACELERAR O RESULTADO (dinâmico por dor de pele) -->
+  <tr><td class="px" style="padding:32px 24px 32px;background:#F9F6F5;">
+  
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:26px;line-height:32px;font-weight:700;color:#1D1D1B;text-align:center;">Rotina completa pra <em class="serif">começar a cuidar do rosto</em></h2>
+    <p style="margin:0 0 20px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#374151;text-align:center;">Pra quem está começando: tratar, hidratar e proteger todo dia. Três passos que já mudam a pele.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="168" valign="top" style="width:168px;"><div class="ph" style="width:168px;height:168px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:168px;color:#1D1D1B;">IMG 1:1 · Sérum Multivitamínico</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum Multivitamínico</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Vitaminas A, B3, B5, C e F pra devolver a luz e uniformizar o tom.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:20px;line-height:26px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p><p style="margin:0 0 12px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <table role="presentation" class="cta-card" cellpadding="0" cellspacing="0"><tr><td style="background:#F50A78;border-radius:999px;">
+            <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTIVITAMINICO:1?utm_source=klaviyo&utm_medium=email&utm_campaign=proximo-passo-e1&utm_content=fallback-serum-multivitaminico" style="display:inline-block;padding:13px 24px;font-family:'Poppins',Arial,sans-serif;font-size:14px;line-height:18px;font-weight:700;color:#FFFFFF;text-decoration:none;">Quero o sérum</a>
+          </td></tr></table>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="168" valign="top" style="width:168px;"><div class="ph" style="width:168px;height:168px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:168px;color:#1D1D1B;">IMG 1:1 · Creme Ultra Repair</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:22px;font-weight:700;color:#1D1D1B;">Creme Ultra Repair</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Ceramida e ácido hialurônico. A pele fica confortável no mesmo dia.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:20px;line-height:26px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p><p style="margin:0 0 12px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <table role="presentation" class="cta-card" cellpadding="0" cellspacing="0"><tr><td style="background:#F50A78;border-radius:999px;">
+            <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-CREME-ULTRA-REPAIR:1?utm_source=klaviyo&utm_medium=email&utm_campaign=proximo-passo-e1&utm_content=fallback-creme-ultra-repair" style="display:inline-block;padding:13px 24px;font-family:'Poppins',Arial,sans-serif;font-size:14px;line-height:18px;font-weight:700;color:#FFFFFF;text-decoration:none;">Quero o creme</a>
+          </td></tr></table>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="168" valign="top" style="width:168px;"><div class="ph" style="width:168px;height:168px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:168px;color:#1D1D1B;">IMG 1:1 · Protetor FPS 70 Clareador</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:22px;font-weight:700;color:#1D1D1B;">Protetor FPS 70 Clareador</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Protege do sol e da luz visível, e a niacinamida clareia com o uso.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:20px;line-height:26px;font-weight:800;color:#1D1D1B;">R$&nbsp;34,90</p><p style="margin:0 0 12px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;2,91</p>
+          <table role="presentation" class="cta-card" cellpadding="0" cellspacing="0"><tr><td style="background:#F50A78;border-radius:999px;">
+            <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-PROTETOR-FPS70:1?utm_source=klaviyo&utm_medium=email&utm_campaign=proximo-passo-e1&utm_content=fallback-protetor-fps70" style="display:inline-block;padding:13px 24px;font-family:'Poppins',Arial,sans-serif;font-size:14px;line-height:18px;font-weight:700;color:#FFFFFF;text-decoration:none;">Quero o protetor</a>
+          </td></tr></table>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <!-- CASHBACK ANTECIPADO EM TICKET -->
+    <p style="margin:28px 0 14px;font-family:'Barlow',Arial,sans-serif;font-size:17px;line-height:24px;color:#1D1D1B;text-align:center;">Pra completar a sua rotina, <strong>seu Cashback Antecipado já está liberado:</strong></p>
+    <table role="presentation" class="ticket" width="420" align="center" cellpadding="0" cellspacing="0" style="width:420px;margin:0 auto;">
+      <tr><td style="padding:24px 20px 18px;background:#F8D7DE;border-radius:16px 16px 0 0;text-align:center;">
+        <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:500;letter-spacing:0.06em;color:#1D1D1B;">CASHBACK ANTECIPADO</p>
+        <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:46px;line-height:52px;font-weight:800;color:#1D1D1B;">R$&nbsp;15</p>
+        <p style="margin:2px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">da sua última compra</p>
+        <p style="margin:4px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;font-weight:600;color:#1D1D1B;">Vale em compras acima de R$&nbsp;150</p>
+      </td></tr>
+      <tr><td style="background:#E191A0;padding:0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+          <td width="14" style="width:14px;"><div style="width:14px;height:28px;background:#F9F6F5;border-radius:0 14px 14px 0;"></div></td>
+          <td style="border-top:2px dashed #F8D7DE;font-size:0;line-height:0;">&nbsp;</td>
+          <td width="14" style="width:14px;"><div style="width:14px;height:28px;background:#F9F6F5;border-radius:14px 0 0 14px;"></div></td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="padding:4px 20px 24px;background:#E191A0;border-radius:0 0 16px 16px;text-align:center;">
+        <table role="presentation" align="center" cellpadding="0" cellspacing="0"><tr>
+          <td style="padding-right:12px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:18px;color:#FFFFFF;">Use o código:</td>
+          <td style="padding:10px 22px;border:1.5px dashed #FFFFFF;border-radius:8px;font-family:'Poppins',Arial,sans-serif;font-size:19px;line-height:22px;font-weight:700;letter-spacing:0.06em;color:#FFFFFF;">ROTINA15</td>
+        </tr></table>
+      </td></tr>
+    </table>
+    <p style="margin:18px 0 4px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">A rotina completa passa de R$&nbsp;150, então o <strong>Cashback Antecipado</strong> já entra nela.<br>Válido até 18/09, às 23h59.</p>
+    <p style="margin:10px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;color:#6B7280;text-align:center;">Os 3 juntos: de <span style="text-decoration:line-through;">R$&nbsp;154,70</span> por</p>
+    <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:800;color:#1D1D1B;text-align:center;">R$&nbsp;139,70</p>
+    <p style="margin:2px 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;text-align:center;">ou 12x de R$&nbsp;11,64</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#F50A78;border-radius:999px;">
+      <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTIVITAMINICO:1,TOKEN-CREME-ULTRA-REPAIR:1,TOKEN-PROTETOR-FPS70:1?promocode=ROTINA15&utm_source=klaviyo&utm_medium=email&utm_campaign=proximo-passo-e1&utm_content=fallback-rotina" style="display:block;padding:16px 32px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.04em;color:#FFFFFF;text-decoration:none;">Quero a rotina completa</a>
+    </td></tr></table>
+  
+    <p style="margin:24px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;"><strong>P.S.</strong> Seu Cashback Antecipado de R$&nbsp;15 vale até 18/09, às 23h59, em compras acima de R$&nbsp;150. E se o produto não combinar com a sua pele, você tem 7 dias pra devolver.</p>
+  </td></tr>
+
+  <!-- S5 · SELOS -->
+  <tr><td class="px" style="padding:24px 24px 16px;background:#FFFFFF;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <div style="width:56px;height:56px;border:1.5px solid #E191A0;border-radius:50%;margin:0 auto;font-family:Arial,sans-serif;font-size:9px;line-height:56px;color:#1D1D1B;">ÍCONE</div>
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">Compra 100% segura</p>
+      </td>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <div style="width:56px;height:56px;border:1.5px solid #E191A0;border-radius:50%;margin:0 auto;font-family:Arial,sans-serif;font-size:9px;line-height:56px;color:#1D1D1B;">ÍCONE</div>
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">Frete rápido pra todo o Brasil</p>
+      </td>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <div style="width:56px;height:56px;border:1.5px solid #E191A0;border-radius:50%;margin:0 auto;font-family:Arial,sans-serif;font-size:9px;line-height:56px;color:#1D1D1B;">ÍCONE</div>
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">7 dias de garantia</p>
+      </td>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <img src="../assets/brand/selo-derm-testado.webp" width="56" alt="Dermatologicamente testado" style="width:56px;margin:0 auto;">
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">Dermatologicamente testado</p>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <!-- S6 · GRUPO VIP -->
+  <tr><td class="px" style="padding:28px 32px 32px;background:#FDEDF1;text-align:center;">
+    <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:20px;line-height:26px;font-weight:700;color:#1D1D1B;">Grupo VIP da Hidrabene</p>
+    <p style="margin:0 0 18px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;">No WhatsApp, as ofertas chegam lá antes.</p>
+    <table role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td style="border:1.5px solid #1D1D1B;border-radius:999px;">
+      <a href="#LINK-GRUPO-VIP" style="display:block;padding:14px 36px;font-family:'Poppins',Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.04em;color:#1D1D1B;text-decoration:none;">Entrar no grupo</a>
+    </td></tr></table>
+  </td></tr>
+
+  <!-- S7 · FOOTER -->
+  <tr><td class="px" style="padding:24px 32px;background:#EFEBEA;text-align:center;">
+    <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#5F5A58;">Dúvida sobre o pedido? Responda este e-mail ou escreva pra <a href="mailto:faleconosco@hidrabene.com.br" style="color:#5F5A58;">faleconosco@hidrabene.com.br</a></p>
+    <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#5F5A58;"><a href="#LINK-INSTAGRAM" style="color:#5F5A58;">Instagram</a> &nbsp;·&nbsp; <a href="#LINK-TIKTOK" style="color:#5F5A58;">TikTok</a></p>
+    <p style="margin:0 0 6px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#5F5A58;">Hidrabene · [endereço]</p>
+    <p style="margin:0;padding-top:6px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#3F3B3A;"><a href="#" style="color:#3F3B3A;">Não quero mais receber e-mails</a></p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
