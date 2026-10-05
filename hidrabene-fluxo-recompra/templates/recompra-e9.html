@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<title>Recompra · E-mail 9</title>
+<!--
+  FLUXO: Recompra · E-mail 9 · D41 depois do WeUP - Pedido Pago
+  ASSUNTO:     Seus R$ 20 vencem depois de amanhã
+  ALTERNATIVO: {{ first_name|default:"" }}, ainda dá tempo de repor com desconto
+  PREVIEW:     Ainda dá tempo de repor com desconto.
+  GERADO POR build_recompra.py (editar lá, não aqui).
+
+  VARIÁVEIS (nomes provisórios, confirmar com a WeUP):
+    event.itens → lista de itens do pedido. Cada item: nome, quantidade, imagem, token_yampi.
+      Tirar do loop brinde e item com preço zero.
+    event.linha → "manchas" | "acne" | "anti_idade" | "hidratacao" | (outro = fallback), deduzida do item facial mais caro.
+  LINKS: TOKEN-... = token Yampi de cada produto. Repor = itens do evento com as mesmas quantidades.
+  DESCONTO (E5 a E10): cupom RECOMPRA20 · R$ 20 off acima de R$ 150 (mínimo no subtotal ANTES do desconto).
+    Na copy: "desconto de reposição" / "seus R$ 20". O prazo é relativo ao envio (E5 = 10 dias, E10 = hoje).
+  BUILD: esconder o card de produto que já está no pedido e puxar a reserva da linha (manter a rotina acima de R$ 150).
+  IMAGENS: blocos rosa = espaço reservado. Logo e selos .webp só pra prévia; no Klaviyo, PNG hospedado.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Barlow:wght@400;500;600&family=Noto+Serif+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;padding:0;background:#F9F6F5;-webkit-text-size-adjust:100%;}
+  table{border-collapse:collapse;}
+  img{border:0;display:block;max-width:100%;height:auto;}
+  em.serif{font-family:'Noto Serif Display',Georgia,serif;font-style:italic;font-weight:500;}
+  @media (max-width:600px){
+    .wrap{width:100%!important;}
+    .px{padding-left:20px!important;padding-right:20px!important;}
+    .h2{font-size:24px!important;line-height:30px!important;}
+    .selo{width:50%!important;display:inline-block!important;padding-bottom:16px!important;}
+    .ticket{width:100%!important;}
+  }
+  @media (max-width:480px){
+    .card-img,.card-txt{display:block!important;width:100%!important;padding:0!important;}
+    .card-img .ph{width:100%!important;}
+    .card-txt{padding-top:14px!important;}
+    .cta-card{width:100%!important;}
+    .cta-card a{display:block!important;text-align:center!important;}
+  }
+  .item-img{width:64px;}
+</style>
+</head>
+<body style="margin:0;padding:0;background:#F9F6F5;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#F9F6F5;">Ainda dá tempo de repor com desconto.&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F9F6F5;">
+<tr><td align="center" style="padding:0;">
+<table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" style="width:600px;background:#FFFFFF;">
+
+  <!-- S1 · HEADER -->
+  <tr><td align="center" style="padding:28px 32px 20px;background:#FFFFFF;">
+    <img src="../assets/brand/logo-hidrabene-nav.webp" width="150" alt="Hidrabene" style="width:150px;">
+  </td></tr>
+
+  <!-- S1 · HEADLINE -->
+  <tr><td class="px" style="padding:32px 32px 12px;background:#FFFFFF;">
+    <h1 style="margin:0 0 12px;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:700;color:#1D1D1B;text-align:center;">Seus R$&nbsp;20 vencem <em class="serif">depois&nbsp;de&nbsp;amanhã</em></h1>
+    <p style="margin:0 0 12px;font-family:'Barlow',Arial,sans-serif;font-size:16px;line-height:24px;color:#1D1D1B;text-align:center;">Se a sua rotina está no fim, dá pra repor pagando menos até depois de amanhã. O desconto vale em compras acima de R$&nbsp;150, e o seu pedido mais a rotina completa já passa disso.</p>
+  </td></tr>
+
+  <!-- DESCONTO DE REPOSIÇÃO EM TICKET -->
+  <tr><td class="px" style="padding:12px 32px 4px;background:#FFFFFF;">
+    <table role="presentation" class="ticket" width="420" align="center" cellpadding="0" cellspacing="0" style="width:420px;margin:0 auto;">
+      <tr><td style="padding:24px 20px 18px;background:#F8D7DE;border-radius:16px 16px 0 0;text-align:center;">
+        <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:500;letter-spacing:0.06em;color:#1D1D1B;">DESCONTO DE REPOSIÇÃO</p>
+        <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:46px;line-height:52px;font-weight:800;color:#1D1D1B;">R$&nbsp;20</p>
+        <p style="margin:2px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">pra repor e completar a sua rotina</p>
+        <p style="margin:4px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;font-weight:600;color:#1D1D1B;">Vale em compras acima de R$&nbsp;150</p>
+      </td></tr>
+      <tr><td style="background:#E191A0;padding:0;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+          <td width="14" style="width:14px;"><div style="width:14px;height:28px;background:#FFFFFF;border-radius:0 14px 14px 0;"></div></td>
+          <td style="border-top:2px dashed #F8D7DE;font-size:0;line-height:0;">&nbsp;</td>
+          <td width="14" style="width:14px;"><div style="width:14px;height:28px;background:#FFFFFF;border-radius:14px 0 0 14px;"></div></td>
+        </tr></table>
+      </td></tr>
+      <tr><td style="padding:4px 20px 24px;background:#E191A0;border-radius:0 0 16px 16px;text-align:center;">
+        <table role="presentation" align="center" cellpadding="0" cellspacing="0"><tr>
+          <td style="padding-right:12px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:18px;color:#FFFFFF;">Use o código:</td>
+          <td style="padding:10px 22px;border:1.5px dashed #FFFFFF;border-radius:8px;font-family:'Poppins',Arial,sans-serif;font-size:19px;line-height:22px;font-weight:700;letter-spacing:0.06em;color:#FFFFFF;">RECOMPRA20</td>
+        </tr></table>
+      </td></tr>
+    </table>
+  </td></tr>
+
+  <!-- CONTAGEM (estática: vale no dia do disparo) -->
+  <tr><td class="px" style="padding:18px 32px 8px;background:#FFFFFF;text-align:center;">
+    <p style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.08em;color:#6B6563;">SEU DESCONTO VENCE</p>
+    <table role="presentation" align="center" cellpadding="0" cellspacing="0" style="margin:0 auto;"><tr>
+      <td style="padding:12px 28px;background:#FDEDF1;border-radius:14px;text-align:center;">
+        <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:34px;line-height:42px;font-weight:800;color:#1D1D1B;">DEPOIS DE AMANHÃ</p>
+      </td>
+    </tr></table>
+    <p style="margin:10px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Às 23h59.</p>
+  </td></tr>
+
+  <!-- PEDIDO + ROTINA NUM CARRINHO SÓ (com o desconto aplicado) -->
+  <tr><td class="px" style="padding:20px 32px 28px;background:#FFFFFF;">
+    <p style="margin:0 0 8px;font-family:'Poppins',Arial,sans-serif;font-size:20px;line-height:26px;font-weight:700;color:#1D1D1B;text-align:center;">Seu pedido + a rotina completa</p>
+    {% if event.linha == "manchas" %}
+    <p style="margin:0 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">O seu último pedido, mais Sérum Multicorretivo Clareador, Sabonete Líquido Facial e Sérum Multivitamínico. Passa dos R$&nbsp;150, então os R$&nbsp;20 já saem no carrinho.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/{% if event.itens %}{% for item in event.itens %}{{ item.token_yampi }}:{{ item.quantidade }}{% if not forloop.last %},{% endif %}{% endfor %},{% endif %}TOKEN-SERUM-MULTICORRETIVO:1,TOKEN-SABONETE-FACIAL:1,TOKEN-SERUM-MULTIVITAMINICO:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=manchas-combo" style="display:block;padding:16px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#FFFFFF;text-decoration:none;">Repor e completar com R$&nbsp;20 off</a></td></tr></table>
+    {% elif event.linha == "acne" %}
+    <p style="margin:0 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">O seu último pedido, mais Gel Secativo Antiacne, Esfoliante Antiacne e Máscara de Argila. Passa dos R$&nbsp;150, então os R$&nbsp;20 já saem no carrinho.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/{% if event.itens %}{% for item in event.itens %}{{ item.token_yampi }}:{{ item.quantidade }}{% if not forloop.last %},{% endif %}{% endfor %},{% endif %}TOKEN-GEL-SECATIVO:1,TOKEN-ESFOLIANTE-ANTIACNE:1,TOKEN-MASCARA-ARGILA:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=acne-combo" style="display:block;padding:16px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#FFFFFF;text-decoration:none;">Repor e completar com R$&nbsp;20 off</a></td></tr></table>
+    {% elif event.linha == "anti_idade" %}
+    <p style="margin:0 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">O seu último pedido, mais Retinol Noturno, Sérum GHK-Cu e Sérum para Área dos Olhos. Passa dos R$&nbsp;150, então os R$&nbsp;20 já saem no carrinho.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/{% if event.itens %}{% for item in event.itens %}{{ item.token_yampi }}:{{ item.quantidade }}{% if not forloop.last %},{% endif %}{% endfor %},{% endif %}TOKEN-RETINOL:1,TOKEN-SERUM-GHKCU:1,TOKEN-SERUM-OLHOS:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=anti_idade-combo" style="display:block;padding:16px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#FFFFFF;text-decoration:none;">Repor e completar com R$&nbsp;20 off</a></td></tr></table>
+    {% elif event.linha == "hidratacao" %}
+    <p style="margin:0 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">O seu último pedido, mais Creme Ultra Repair, Sérum Multivitamínico e Máscara Illumine de Peptídeos. Passa dos R$&nbsp;150, então os R$&nbsp;20 já saem no carrinho.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/{% if event.itens %}{% for item in event.itens %}{{ item.token_yampi }}:{{ item.quantidade }}{% if not forloop.last %},{% endif %}{% endfor %},{% endif %}TOKEN-CREME-ULTRA-REPAIR:1,TOKEN-SERUM-MULTIVITAMINICO:1,TOKEN-MASCARA-ILLUMINE:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=hidratacao-combo" style="display:block;padding:16px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#FFFFFF;text-decoration:none;">Repor e completar com R$&nbsp;20 off</a></td></tr></table>
+    {% else %}
+    <p style="margin:0 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;text-align:center;">O seu último pedido, mais Sérum Multivitamínico, Creme Ultra Repair e Protetor FPS 70 Clareador. Passa dos R$&nbsp;150, então os R$&nbsp;20 já saem no carrinho.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/{% if event.itens %}{% for item in event.itens %}{{ item.token_yampi }}:{{ item.quantidade }}{% if not forloop.last %},{% endif %}{% endfor %},{% endif %}TOKEN-SERUM-MULTIVITAMINICO:1,TOKEN-CREME-ULTRA-REPAIR:1,TOKEN-PROTETOR-FPS70:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=fallback-combo" style="display:block;padding:16px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#FFFFFF;text-decoration:none;">Repor e completar com R$&nbsp;20 off</a></td></tr></table>
+    {% endif %}
+  </td></tr>
+
+  <!-- PEDIDO ANTERIOR (dinâmico: itens do evento) -->
+  <tr><td class="px" style="padding:24px 24px 28px;background:#FFFFFF;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #F8D7DE;border-radius:20px;"><tr><td style="padding:20px;">
+      <p style="margin:0 0 14px;font-family:'Poppins',Arial,sans-serif;font-size:12px;line-height:16px;font-weight:700;letter-spacing:0.08em;color:#E56C91;">SEU ÚLTIMO PEDIDO</p>
+      {% if event.itens %}
+      {% for item in event.itens %}
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:10px;"><tr>
+        <td class="item-img" width="64" valign="middle" style="width:64px;"><img src="{{ item.imagem }}" width="64" height="64" alt="" style="width:64px;height:64px;border-radius:12px;background:#F8D7DE;"></td>
+        <td valign="middle" style="padding-left:14px;">
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;">{{ item.nome }}</p>
+          <p style="margin:2px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:18px;color:#6B6563;">Quantidade: {{ item.quantidade }}</p>
+        </td>
+      </tr></table>
+      {% endfor %}
+      <div style="height:8px;line-height:8px;">&nbsp;</div>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/{% for item in event.itens %}{{ item.token_yampi }}:{{ item.quantidade }}{% if not forloop.last %},{% endif %}{% endfor %}?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=repor-pedido" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Repor meu pedido</a></td></tr></table><p style="margin:12px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#6B6563;text-align:center;">Se o pedido sozinho ficar abaixo de R$&nbsp;150, junte com a rotina pra usar o desconto.</p>
+      {% else %}
+      <p style="margin:0 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;">Os produtos que você usa estão todos na loja, com entrega pra todo o Brasil.</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="#LINK-LOJA?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=repor-loja" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Ver os produtos</a></td></tr></table>
+      {% endif %}
+    </td></tr></table>
+  </td></tr>
+
+  <!-- ROTINA COMPLEMENTAR (dinâmica por event.linha) -->
+  <tr><td class="px" style="padding:30px 24px 28px;background:#F9F6F5;"><p style="margin:0 0 18px;font-family:'Barlow',Arial,sans-serif;font-size:16px;line-height:24px;color:#1D1D1B;text-align:center;">Ou só a rotina completa:</p>
+  {% if event.linha == "manchas" %}
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:24px;line-height:30px;font-weight:700;color:#1D1D1B;text-align:center;">Rotina completa pra pele com <em class="serif">manchas</em></h2><p style="margin:0 0 20px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#374151;text-align:center;">Proteger impede a mancha de piorar. Pra clarear a que já está aí, a pele precisa de um ativo trabalhando todo dia.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sérum Multicorretivo Clareador</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum Multicorretivo Clareador</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Tranexâmico 3%, kójico 1% e niacinamida 5% cuidando do tom, manhã e noite.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTICORRETIVO:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=manchas-serum-multicorretivo" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o sérum</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sabonete Líquido Facial</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sabonete Líquido Facial</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Limpa sem repuxar e deixa a pele pronta pro ativo penetrar melhor.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;34,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;2,91</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SABONETE-FACIAL:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=manchas-sabonete-facial" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o sabonete</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sérum Multivitamínico</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum Multivitamínico</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Vitaminas A, B3, B5, C e F pra devolver a luz enquanto o tom uniformiza.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTIVITAMINICO:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=manchas-serum-multivitaminico" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero esse</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <p style="margin:14px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;color:#6B7280;text-align:center;">Os 3 juntos: de <span style="text-decoration:line-through;">R$&nbsp;154,70</span> por</p>
+    <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:800;color:#1D1D1B;text-align:center;">R$&nbsp;134,70</p>
+    <p style="margin:2px 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;text-align:center;">ou 12x de R$&nbsp;11,22</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTICORRETIVO:1,TOKEN-SABONETE-FACIAL:1,TOKEN-SERUM-MULTIVITAMINICO:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=manchas-rotina" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Quero a rotina com R$&nbsp;20 off</a></td></tr></table>
+  {% elif event.linha == "acne" %}
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:24px;line-height:30px;font-weight:700;color:#1D1D1B;text-align:center;">Rotina completa pra pele com <em class="serif">acne e oleosidade</em></h2><p style="margin:0 0 20px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#374151;text-align:center;">Limpar bem é o começo. Esses três vão direto onde a acne insiste em aparecer.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Gel Secativo Antiacne</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Gel Secativo Antiacne</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Vai no ponto: seca a espinha e acalma a vermelhidão.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;69,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;5,83</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-GEL-SECATIVO:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=acne-gel-secativo" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o secativo</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Esfoliante Antiacne</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Esfoliante Antiacne</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Uma ou duas vezes por semana, desobstrui o poro e renova a pele.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-ESFOLIANTE-ANTIACNE:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=acne-esfoliante-antiacne" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o esfoliante</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Máscara de Argila</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Máscara de Argila</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Purifica e segura o brilho. Vira a máscara do seu domingo.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;29,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;2,49</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-MASCARA-ARGILA:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=acne-mascara-argila" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero a máscara</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <p style="margin:14px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;color:#6B7280;text-align:center;">Os 3 juntos: de <span style="text-decoration:line-through;">R$&nbsp;159,70</span> por</p>
+    <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:800;color:#1D1D1B;text-align:center;">R$&nbsp;139,70</p>
+    <p style="margin:2px 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;text-align:center;">ou 12x de R$&nbsp;11,64</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-GEL-SECATIVO:1,TOKEN-ESFOLIANTE-ANTIACNE:1,TOKEN-MASCARA-ARGILA:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=acne-rotina" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Quero a rotina com R$&nbsp;20 off</a></td></tr></table>
+  {% elif event.linha == "anti_idade" %}
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:24px;line-height:30px;font-weight:700;color:#1D1D1B;text-align:center;">Rotina completa pra pele que quer <em class="serif">mais firmeza</em></h2><p style="margin:0 0 20px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#374151;text-align:center;">Linha fina e firmeza respondem a constância. Pra ver diferença mais cedo, dá pra trabalhar a pele à noite e cuidar de onde ela é mais fina.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Retinol Noturno</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Retinol Noturno</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Renova a pele e suaviza as linhas enquanto você dorme. Comece em noites alternadas.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-RETINOL:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=anti_idade-retinol" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o retinol</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sérum GHK-Cu</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum GHK-Cu</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Peptídeo de cobre pra firmeza e densidade, que aparece com o uso contínuo.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;99,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;8,33</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-GHKCU:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=anti_idade-serum-ghkcu" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o GHK-Cu</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sérum para Área dos Olhos</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum para Área dos Olhos</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Feito pra pele fina ao redor dos olhos, onde o cansaço aparece primeiro.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-OLHOS:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=anti_idade-serum-olhos" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero esse</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <p style="margin:14px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;color:#6B7280;text-align:center;">Os 3 juntos: de <span style="text-decoration:line-through;">R$&nbsp;219,70</span> por</p>
+    <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:800;color:#1D1D1B;text-align:center;">R$&nbsp;199,70</p>
+    <p style="margin:2px 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;text-align:center;">ou 12x de R$&nbsp;16,64</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-RETINOL:1,TOKEN-SERUM-GHKCU:1,TOKEN-SERUM-OLHOS:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=anti_idade-rotina" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Quero a rotina com R$&nbsp;20 off</a></td></tr></table>
+  {% elif event.linha == "hidratacao" %}
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:24px;line-height:30px;font-weight:700;color:#1D1D1B;text-align:center;">Rotina completa pra pele <em class="serif">seca ou sem viço</em></h2><p style="margin:0 0 20px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#374151;text-align:center;">O viço volta mais rápido quando a pele para de perder água. Primeiro hidrata, depois ilumina.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Creme Ultra Repair</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Creme Ultra Repair</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Ceramida e ácido hialurônico. A pele fica confortável no mesmo dia.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-CREME-ULTRA-REPAIR:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=hidratacao-creme-ultra-repair" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o creme</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sérum Multivitamínico</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum Multivitamínico</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Cinco vitaminas pra pele opaca recuperar a luz.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTIVITAMINICO:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=hidratacao-serum-multivitaminico" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o sérum</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Máscara Illumine de Peptídeos</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Máscara Illumine de Peptídeos</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Peptídeos e argila roxa, uma vez por semana, pra devolver o viço.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;39,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;3,33</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-MASCARA-ILLUMINE:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=hidratacao-mascara-illumine" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero a máscara</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <p style="margin:14px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;color:#6B7280;text-align:center;">Os 3 juntos: de <span style="text-decoration:line-through;">R$&nbsp;159,70</span> por</p>
+    <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:800;color:#1D1D1B;text-align:center;">R$&nbsp;139,70</p>
+    <p style="margin:2px 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;text-align:center;">ou 12x de R$&nbsp;11,64</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-CREME-ULTRA-REPAIR:1,TOKEN-SERUM-MULTIVITAMINICO:1,TOKEN-MASCARA-ILLUMINE:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=hidratacao-rotina" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Quero a rotina com R$&nbsp;20 off</a></td></tr></table>
+  {% else %}
+    <h2 class="h2" style="margin:0 0 10px;font-family:'Poppins',Arial,sans-serif;font-size:24px;line-height:30px;font-weight:700;color:#1D1D1B;text-align:center;">Rotina completa pra <em class="serif">começar a cuidar do rosto</em></h2><p style="margin:0 0 20px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#374151;text-align:center;">Pra quem está começando: tratar, hidratar e proteger todo dia. Três passos que já mudam a pele.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Sérum Multivitamínico</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Sérum Multivitamínico</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Vitaminas A, B3, B5, C e F pra devolver a luz e uniformizar o tom.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTIVITAMINICO:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=fallback-serum-multivitaminico" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o sérum</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Creme Ultra Repair</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Creme Ultra Repair</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Ceramida e ácido hialurônico. A pele fica confortável no mesmo dia.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;59,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;4,99</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-CREME-ULTRA-REPAIR:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=fallback-creme-ultra-repair" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o creme</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FFFFFF;border-radius:20px;margin-bottom:12px;"><tr><td style="padding:16px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+        <td class="card-img" width="140" valign="top" style="width:140px;"><div class="ph" style="width:140px;height:140px;background:#F8D7DE;border-radius:12px;text-align:center;font-family:Arial,sans-serif;font-size:11px;line-height:140px;color:#1D1D1B;">IMG 1:1 · Protetor FPS 70 Clareador</div></td>
+        <td class="card-txt" valign="top" style="padding-left:16px;text-align:left;">
+          <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:17px;line-height:22px;font-weight:700;color:#1D1D1B;">Protetor FPS 70 Clareador</p>
+          <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:14px;line-height:20px;color:#1D1D1B;">Protege do sol e da luz visível, e a niacinamida clareia com o uso.</p>
+          <p style="margin:0;font-family:'Poppins',Arial,sans-serif;font-size:18px;line-height:24px;font-weight:800;color:#1D1D1B;">R$&nbsp;34,90</p>
+          <p style="margin:0 0 10px;font-family:'Barlow',Arial,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1D1D1B;">ou 12x de R$&nbsp;2,91</p>
+          <a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-PROTETOR-FPS70:1?utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=fallback-protetor-fps70" style="font-family:'Poppins',Arial,sans-serif;font-size:14px;font-weight:700;color:#F50A78;text-decoration:underline;">Quero o protetor</a>
+        </td>
+      </tr></table>
+    </td></tr></table>
+    <p style="margin:14px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;color:#6B7280;text-align:center;">Os 3 juntos: de <span style="text-decoration:line-through;">R$&nbsp;154,70</span> por</p>
+    <p style="margin:2px 0 0;font-family:'Poppins',Arial,sans-serif;font-size:28px;line-height:34px;font-weight:800;color:#1D1D1B;text-align:center;">R$&nbsp;134,70</p>
+    <p style="margin:2px 0 16px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:20px;font-weight:600;color:#1D1D1B;text-align:center;">ou 12x de R$&nbsp;11,22</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="border:1.5px solid #F50A78;border-radius:999px;"><a href="https://hidrabene.pay.yampi.com.br/r/TOKEN-SERUM-MULTIVITAMINICO:1,TOKEN-CREME-ULTRA-REPAIR:1,TOKEN-PROTETOR-FPS70:1?promocode=RECOMPRA20&utm_source=klaviyo&utm_medium=email&utm_campaign=recompra-e9&utm_content=fallback-rotina" style="display:block;padding:14px 28px;font-family:'Poppins',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.03em;color:#F50A78;text-decoration:none;">Quero a rotina com R$&nbsp;20 off</a></td></tr></table>
+  {% endif %}
+  </td></tr>
+
+  <tr><td class="px" style="padding:4px 32px 28px;background:#F9F6F5;">
+    <p style="margin:0;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;"><strong>P.S.</strong> Mudou de ideia depois que a caixa chegou? Você tem 7 dias pra devolver.</p>
+  </td></tr>
+
+  <!-- S5 · SELOS -->
+  <tr><td class="px" style="padding:24px 24px 16px;background:#FFFFFF;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <div style="width:56px;height:56px;border:1.5px solid #E191A0;border-radius:50%;margin:0 auto;font-family:Arial,sans-serif;font-size:9px;line-height:56px;color:#1D1D1B;">ÍCONE</div>
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">Compra 100% segura</p>
+      </td>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <div style="width:56px;height:56px;border:1.5px solid #E191A0;border-radius:50%;margin:0 auto;font-family:Arial,sans-serif;font-size:9px;line-height:56px;color:#1D1D1B;">ÍCONE</div>
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">Frete rápido pra todo o Brasil</p>
+      </td>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <div style="width:56px;height:56px;border:1.5px solid #E191A0;border-radius:50%;margin:0 auto;font-family:Arial,sans-serif;font-size:9px;line-height:56px;color:#1D1D1B;">ÍCONE</div>
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">7 dias de garantia</p>
+      </td>
+      <td class="selo" width="25%" align="center" valign="top" style="padding:0 4px;">
+        <img src="../assets/brand/selo-derm-testado.webp" width="56" alt="Dermatologicamente testado" style="width:56px;margin:0 auto;">
+        <p style="margin:8px 0 0;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#1D1D1B;">Dermatologicamente testado</p>
+      </td>
+    </tr></table>
+  </td></tr>
+
+  <!-- S6 · GRUPO VIP -->
+  <tr><td class="px" style="padding:28px 32px 32px;background:#FDEDF1;text-align:center;">
+    <p style="margin:0 0 6px;font-family:'Poppins',Arial,sans-serif;font-size:20px;line-height:26px;font-weight:700;color:#1D1D1B;">Grupo VIP da Hidrabene</p>
+    <p style="margin:0 0 18px;font-family:'Barlow',Arial,sans-serif;font-size:15px;line-height:22px;color:#1D1D1B;">No WhatsApp, as ofertas chegam lá antes.</p>
+    <table role="presentation" cellpadding="0" cellspacing="0" align="center"><tr><td style="border:1.5px solid #1D1D1B;border-radius:999px;">
+      <a href="#LINK-GRUPO-VIP" style="display:block;padding:14px 36px;font-family:'Poppins',Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.04em;color:#1D1D1B;text-decoration:none;">Entrar no grupo</a>
+    </td></tr></table>
+  </td></tr>
+
+  <!-- S7 · FOOTER -->
+  <tr><td class="px" style="padding:24px 32px;background:#EFEBEA;text-align:center;">
+    <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#5F5A58;">Dúvida sobre o pedido? Responda este e-mail ou escreva pra <a href="mailto:faleconosco@hidrabene.com.br" style="color:#5F5A58;">faleconosco@hidrabene.com.br</a></p>
+    <p style="margin:0 0 8px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#5F5A58;"><a href="#LINK-INSTAGRAM" style="color:#5F5A58;">Instagram</a> &nbsp;·&nbsp; <a href="#LINK-TIKTOK" style="color:#5F5A58;">TikTok</a></p>
+    <p style="margin:0 0 6px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#5F5A58;">{{ organization.name }} · {{ organization.full_address }}</p>
+    <p style="margin:0;padding-top:6px;font-family:'Barlow',Arial,sans-serif;font-size:12px;line-height:16px;color:#3F3B3A;"><a href="{% unsubscribe_link %}" style="color:#3F3B3A;">Não quero mais receber e-mails</a></p>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
